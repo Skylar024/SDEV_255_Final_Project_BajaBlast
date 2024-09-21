@@ -1,0 +1,99 @@
+﻿body {
+    background-color: #7E543A;
+    background-image: linear-gradient(#E7D2AD,#472A2B);
+    background-repeat: no-repeat;
+    color: #964B00;
+    font-family: cursive fantasy;
+}
+
+header {
+    background-color: #7E543A;
+    background-image: url("../img/banner.png");
+    background-repeat: no-repeat;
+    background-position: right;
+    height: 72px;
+    color: #E7D2AD;
+    font-family: georgia;
+}
+
+main {
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+h1 {
+    text-align: center;
+    padding-top: .5em;
+}
+
+nav {
+    font-weight: bold;
+    padding-top: .5em;
+    padding-right: .5em;
+    padding-bottom: .5em;
+    text-align: center;
+}
+
+    nav a {
+        text-decoration: underline overline;
+    }
+
+h2 {
+    color: #472A2B;
+    font-family: cursive fantasy;
+}
+
+h3 {
+    font-family: cursive fantasy;
+}
+
+
+footer {
+    font-size: .70em;
+    font-style: italic;
+    text-align: center;
+    padding: 1em;
+}
+
+#wrapper {
+    background-color: #E7D2AD;
+    width: 80%;
+    min-width: 960px;
+    max-width: 1500px;
+    margin-right: auto;
+    margin-left: auto;
+    box-shadow: 5px 5px 5px black;
+}
+
+#studentHero {
+    height: 300px;
+    background-image: url("../img/student.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+#aboutHero {
+    height: 300px;
+    background-image: url("../img/about.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+#indexHero {
+    height: 300px;
+    background-image:
+
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+#teacherHero {
+    height: 300px;
+    background-image: url("../img/teacher.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.resort {
+    height: 72px;
+}
