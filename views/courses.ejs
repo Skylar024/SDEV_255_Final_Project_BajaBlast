@@ -1,0 +1,54 @@
+<html lang="en">
+
+    <%- include('./partials/head.ejs') %>
+
+    <body>
+
+        <%- include('./partials/nav.ejs') %>
+
+        <!--Courses Description-->
+        <section class="">
+            <div class="container">
+                <p>
+                    Description of what the user will find below
+                </p>
+                <div class="courses-list">
+                </div>
+            </div>
+        </section>
+        <!--Courses List-->
+        <section class="">
+            <div class="container">
+                <div class="courseSort-dropdown">
+                    <label class="text-dark" for="sortBy">Sort by:</label>
+                    <!-- <button onclick=printSomething() class="btn btn-outline-secondary" type="button" id="teacherFilter">
+                        Teacher
+                    </button>
+                    <button onclick=printSomething() class="btn btn-outline-secondary" type="button" id="subjectAreaFilter">
+                        Subject Area
+                    </button>
+                    <button onclick=printSomething() class="btn btn-outline-secondary" type="button" id="creditsFilter">
+                        Credits
+                    </button> -->
+                    <% if (courseList.length > 0) { %>
+                        <% courseList.forEach(courseList => { %>
+
+                            <h3 class="title"><%= courseList.title %></h3>
+                            <p class="snippet"><%= courseList.snippet %></p>
+                            <p class="snippet2"><%= courseList.snippet2 %></p>
+                            <p class="snippet3"><%= courseList.snippet3 %></p>
+
+                        <% }) %>
+                    <% } else { %>
+                        <p>There are no Courses Listed...</p>
+                    <% } %>
+                </div>
+                <!-- <div id="courseList-div">Courses List</div>
+                </div> -->
+        </section>
+
+        <%- include('./partials/footer.ejs') %>
+
+    </body>
+
+</html>

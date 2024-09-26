@@ -1,0 +1,93 @@
+<html lang="en">
+
+    <%- include('./partials/head.ejs') %>
+    
+    <body>
+
+        <%- include('./partials/nav.ejs') %>
+
+        <div id="indexHero">
+            <!--Introduction-->
+            <section class="intro-section">
+                <div class="container">
+                    <h1 style="font-family:cursive;">Welcome to Baja Blast Courses</h1>
+                    <p>
+                        <h4 style="font-family:cursive;">Are you a Student looking for courses to enroll?</h4>
+                    </p>
+                    <p><h4 style="font-family:cursive;">
+                    Or maybe you are a Teacher looking to create a new Course?
+                    </h4></p>
+                    <p><h4 style="font-family:cursive;">Login down below to get started</h4>
+                    </p>
+                    <!--<a href="login.html" class="">Login</a> <!--Sends to login page then user logs in as student or teacher then redirects them to either the student or teacher webpage?-->
+                </div>
+            </section>
+        </div>
+
+        <!--Student, Teacher, & About Sections-->
+        <section class="">
+            <div class="container">
+                <!--Student Section-->
+                <div class="col-md">
+                    <div class="card bg-dark text-light">
+                        <div class="card-body text-center">
+                            <div class="card-title">
+                                Students
+                            </div>
+                            <p class="card-text">
+                                Sign-in here if you are a student
+                            </p>
+                            <a href="/student" class="btn btn-primary">Student Login</a>
+                        </div>
+                    </div>
+                </div>
+                <!--Teacher Section-->
+                <div class="col-md">
+                    <div class="card bg-dark text-light">
+                        <div class="card-body text-center">
+                            <div class="card-title">
+                                Teacher
+                            </div>
+                            <p class="card-text">
+                                Sign-in here if you are a teacher
+                            </p>
+                            <a href="/teacher" class="btn btn-primary">Teacher Login</a>
+                        </div>
+                    </div>
+                </div>
+                <!--About Section-->
+                <div class="col-md">
+                    <div class="card bg-dark text-light">
+                        <div class="card-body text-center">
+                            <div class="card-title">
+                                About
+                            </div>
+                            <p class="card-text">
+                                Click Here to go to our About page
+                            </p>
+                            <a href="/about" class="btn btn-primary">About Us</a>
+                        </div>
+                    </div>
+                </div>
+                 <!--Courses Section-->
+                <div class="col-md"></div>
+                    <div class="card bg-dark text-light">
+                        <div class="card-body text-center">
+                            <div class="card-title">
+                                Courses
+                            </div>
+                            <p class="card-text">
+                                Click Here to view our entire list of courses offered
+                            </p>
+                            <a href="/courses" class="btn btn-primary">Offered Courses</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <%- include('./partials/footer.ejs') %>
+
+    </body>
+</html>
