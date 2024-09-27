@@ -1,13 +1,13 @@
 ﻿body {
     background-color: #7E543A;
-    background-image: linear-gradient(#E7D2AD,#472A2B);
+    background-image: linear-gradient(#1BD7BB,#0F52BA);
     background-repeat: no-repeat;
     color: #964B00;
     font-family: cursive fantasy;
 }
 
 header {
-    background-color: #7E543A;
+    background-color: #3F00FF;
     background-image: url("../img/banner.png");
     background-repeat: no-repeat;
     background-position: right;
@@ -56,7 +56,7 @@ footer {
 }
 
 #wrapper {
-    background-color: #E7D2AD;
+    background-color: #89CFF0;
     width: 80%;
     min-width: 960px;
     max-width: 1500px;
