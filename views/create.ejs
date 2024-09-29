@@ -1,0 +1,45 @@
+<html lang="en"></html>
+<%- include('./partials/head.ejs') %>
+<body>
+
+    <%- include('./partials/nav.ejs') %>
+
+    <h1>Create a Course</h1>
+    <div class="create-course content">
+        <form action="/courses" method="POST">
+            <!-- Name -->
+            <label for="name">Course Name (at least 3 characters):</label><br>
+            <input type="text" id="name" name="name" minlength="3" required><br><br>
+    
+            <!-- Subject -->
+            <label for="subject">Subject:</label><br>
+            <input type="text" id="subject" name="subject" required><br><br>
+    
+            <!-- Description -->
+            <label for="description">Description:</label><br>
+            <textarea id="description" name="description" required></textarea><br><br>
+    
+            <!-- Number of Credits -->
+            <label for="numberOfCredits">Number of Credits (minimum 1):</label><br>
+            <input type="number" id="numberOfCredits" name="numberOfCredits" min="1" required><br><br>
+    
+            <!-- Start Date -->
+            <label for="startDate">Start Date:</label><br>
+            <input type="date" id="startDate" name="startDate" required><br><br>
+    
+            <!-- End Date -->
+            <label for="endDate">End Date (must be after start date):</label><br>
+            <input type="date" id="endDate" name="endDate" required><br><br>
+    
+            <!-- Teacher -->
+            <label for="teacher">Teacher Name:</label><br>
+            <input type="text" id="teacher" name="teacher" required><br><br>
+    
+            <!-- Submit Button -->
+            <button type="submit">Create Course</button>
+        </form>
+
+    </div>
+    
+</body>
+</html>

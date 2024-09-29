@@ -1,0 +1,36 @@
+<html lang="en"></html>
+<%- include('./partials/head.ejs') %>
+<body>
+
+    <%- include('./partials/nav.ejs') %>
+
+    <h1>Edit Course</h1>
+    <div class="create-course content">
+        <form action="/courses/<%= course._id %>" method="PUT">
+            <label for="name">Course Name:</label>
+            <input type="text" id="name" name="name" value="<%= course.name %>" required>
+          
+            <label for="teacher">Teacher:</label>
+            <input type="text" id="teacher" name="teacher" value="<%= course.teacher %>" required>
+          
+            <label for="subject">Subject:</label>
+            <input type="text" id="subject" name="subject" value="<%= course.subject %>" required>
+          
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required><%= course.description %></textarea>
+          
+            <label for="numberOfCredits">Credits:</label>
+            <input type="number" id="numberOfCredits" name="numberOfCredits" value="<%= course.numberOfCredits %>" min="1" required>
+          
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" name="startDate" value="<%= course.startDate.toISOString().substring(0, 10) %>" required>
+          
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate" name="endDate" value="<%= course.endDate.toISOString().substring(0, 10) %>" required>
+          
+            <button type="submit">Update Course</button>
+          </form>
+    </div>
+    
+</body>
+</html>

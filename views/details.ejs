@@ -1,0 +1,51 @@
+
+
+<body>
+  <%- include('./partials/nav.ejs') %>
+
+  <div class="details content">
+    <h2><%= course.name %></h2>
+
+    <div class="content">
+      <p>Teacher: <%= course.teacher %></p>
+      <p>Subject: <%= course.subject %></p>
+      <p>Description: <%= course.description %></p>
+      <p>Credits: <%= course.numberOfCredits %></p>
+      <p>Start Date: <%= course.startDate.toDateString() %></p>
+      <p>End Date: <%= course.endDate.toDateString() %></p>
+    </div>
+
+    <!-- Delete Link -->
+    <a class="delete" data-doc="<%= course._id %>">Delete</a>
+
+    <!-- Update Link -->
+    <a class="update" href="/courses/<%= course._id %>/edit">Update</a>
+  </div>
+
+  <!-- Script for handling delete operation -->
+  <script>
+    const trashcan = document.querySelector('a.delete');
+
+    trashcan.addEventListener('click', (e) => {
+      e.preventDefault(); // Prevent default link behavior
+      const endpoint = `/courses/${trashcan.dataset.doc}`;
+
+      fetch(endpoint, {
+        method: 'DELETE',
+      })
+      .then((response) => response.json())
+      .then(data => {
+        if (data.redirect) {
+          window.location.href = data.redirect; // Redirect after delete
+        }
+      })
+      .catch(err => console.error('Error:', err));
+    });
+  </script>
+</body>
+
+    
+
+</body>
+
+</html>
