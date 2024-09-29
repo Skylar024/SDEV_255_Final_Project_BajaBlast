@@ -1,4 +1,4 @@
-﻿body {
+body {
     background-color: #7E543A;
     background-image: linear-gradient(#1BD7BB,#0F52BA);
     background-repeat: no-repeat;
@@ -8,7 +8,7 @@
 
 header {
     background-color: #3F00FF;
-    background-image: url("../img/banner.png");
+    background-image: url("./img/banner.png");
     background-repeat: no-repeat;
     background-position: right;
     height: 72px;
@@ -67,7 +67,7 @@ footer {
 
 #studentHero {
     height: 300px;
-    background-image: url("../img/student.png");
+    background-image: url("./img/student.png");
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }
@@ -81,7 +81,7 @@ footer {
 
 #indexHero {
     height: 300px;
-    background-image:
+    background-image:url("./img/about.png");
 
     background-size: 100% 100%;
     background-repeat: no-repeat;
@@ -89,7 +89,7 @@ footer {
 
 #teacherHero {
     height: 300px;
-    background-image: url("../img/teacher.png");
+    background-image: url("./img/teacher.png");
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }
@@ -97,3 +97,62 @@ footer {
 .resort {
     height: 72px;
 }
+
+/* create styles */
+.create-blog form{
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  .create-blog input,
+  .create-blog textarea{
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 4px;
+  }
+  .create-blog label{
+    display: block;
+    margin-top: 6px;
+  }
+  textarea{
+    height: 70px;
+  }
+  .create-blog button{
+    margin-top: 10px;
+    background: crimson;
+    color: white;
+    padding: 3px;
+    border: 0;
+    font-size: 1.2em;
+    cursor: pointer;
+  }
+
+  
+  a.delete, a.update {
+    cursor: pointer; /* Ensure that the pointer shows it's clickable */
+    color: blue; /* Make sure it stands out visually */
+    display: inline-block; /* Makes sure the element has proper size */
+    padding: 10px;
+  }
+
+  .delete{
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 50%;
+    padding: 8px;
+  }
+  .delete:hover{
+    cursor: pointer;
+    box-shadow: 1px 2px 3px rgba(173, 5, 5, 0.2);
+  }
+  .content{
+    margin-left: 20px;
+  }
+
+
+  /* details styles */
+  .details{
+    position: relative;
+  }
+
