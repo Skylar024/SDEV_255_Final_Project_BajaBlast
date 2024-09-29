@@ -30,17 +30,17 @@
                     <button onclick=printSomething() class="btn btn-outline-secondary" type="button" id="creditsFilter">
                         Credits
                     </button> -->
-                    <% if (courseList.length > 0) { %>
-                        <% courseList.forEach(courseList => { %>
-
-                            <h3 class="title"><%= courseList.title %></h3>
-                            <p class="snippet"><%= courseList.snippet %></p>
-                            <p class="snippet2"><%= courseList.snippet2 %></p>
-                            <p class="snippet3"><%= courseList.snippet3 %></p>
-
+                    <% if (courses.length > 0) { %>
+                        <% courses.forEach(course => { %>
+                            <a class="single" href="/courses/<%=course._id %>">
+                                <h3 class="title"><%= course.name %></h3>
+                                <p class="suject"><%= course.subject %></p>
+            
+                            </a>
+                
+                            
+                
                         <% }) %>
-                    <% } else { %>
-                        <p>There are no Courses Listed...</p>
                     <% } %>
                 </div>
                 <!-- <div id="courseList-div">Courses List</div>
