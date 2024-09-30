@@ -1,7 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
-// const methodOverride = require('method-override');  // Include method-override
+const methodOverride = require('method-override');  // Include method-override
 const Course = require('./models/course');
 
 
@@ -17,7 +17,7 @@ BBApp.set('view engine', 'ejs');
 BBApp.use(express.static('public'));
 BBApp.use(express.urlencoded({ extended: true }));
 BBApp.use(morgan('dev'));
-// BBApp.use(methodOverride('_method'));  // Use method-override
+BBApp.use(methodOverride('_method'));  // Use method-override
 
 
 // Routes
@@ -62,6 +62,12 @@ BBApp.delete('/courses/:id', (req, res) => {
 BBApp.get('/courses/:id/edit', async (req, res) => {
   try {
     const course = await Course.findById(req.params.id);
+    console.log(course)
+
+    course.updateOne( { _id: req.params.id}, 
+                    { $set: {name: course.name}}
+    )
+
     if (!course) {
       return res.status(404).send('Course not found');
     }
@@ -78,6 +84,8 @@ BBApp.put('/courses/:id', async (req, res) => {
     if (!course) {
       return res.status(404).send('Course not found');
     }
+    //console.log(req.params.id, req.body)
+    
     res.redirect(`/courses/${course._id}`);
   } catch (err) {
     if (err.name === 'ValidationError') {
