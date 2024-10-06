@@ -36,6 +36,11 @@ const courseSchema = new Schema({
         type: String,
         required: true,
         trim: true
+    },
+    creator: {
+        type: String,
+        required: true,
+        
     }
 }, { timestamps: true });
 

@@ -31,12 +31,13 @@ nav {
     padding-top: .5em;
     padding-right: .5em;
     padding-bottom: .5em;
-    text-align: center;
+    text-align: center;   
 }
 
-    nav a {
-        text-decoration: underline overline;
-    }
+nav li a {
+    text-transform: uppercase;
+    display: block;
+}
 
 h2 {
     color: #472A2B;
@@ -178,7 +179,72 @@ footer {
   .details{
     position: relative;
   }
-
   
+/* Added by Skylar */
+/* Edit page Styles */
+.create-course-content {
+  box-sizing: border-box;
+  padding: 12px;
+}
+.create-course-content input[type=text], input[type=number], input[type=date] {
+  width: 100%;
+  padding: 12px;
+  resize: vertical;
+  background-color: rgb(190, 189, 189);
+}
+.create-course-content textarea {
+  width: 100%;
+  padding: 12px;
+  resize: vertical;
+  height: 150px;
+  background-color: rgb(190, 189, 189);
+}
+.create-course-content label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+.create-course-content button[type=submit]:hover {
+  background-color: rgb(30, 30, 226);
+}
+.nav-container img{
+  width: 25%;
+  display: block;
+  margin: 0 auto;
+  
+}
+nav ul{
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Login and Sign Up Pages Styles */
+.user-info {
+  min-height: 100px;
+  display: flex;
+  /* border: 8px solid black; */
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.user-info button:hover {
+  background-color: #0288ec;
+}
+.intro-section div{
+  text-align: center;
+}
+.student-card-title h3 {
+  color: #0288ec;
+}
+.teacher-card-title h3 {
+  color: #0288ec;
+}
+.about-card-title h3 {
+  color: #0288ec;
+}
+.courses-card-title h3 {
+  color: #0288ec;
+}
+
 
 

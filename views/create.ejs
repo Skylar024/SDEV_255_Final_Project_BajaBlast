@@ -5,7 +5,7 @@
     <%- include('./partials/nav.ejs') %>
 
     <h1>Create a Course</h1>
-    <div class="create-course content">
+    <div class="create-course-content">
         <form action="/courses" method="POST">
             <!-- Name -->
             <label for="name">Course Name (at least 3 characters):</label><br>
@@ -35,6 +35,12 @@
             <label for="teacher">Teacher Name:</label><br>
             <input type="text" id="teacher" name="teacher" required><br><br>
     
+            <!-- Creator -->
+            <label for="creatorName">Created By:</label><br>
+            <label for="creator"> <%= user.email %> </label><br>
+            <input type="hidden" id="creator" name="creator" value="<%= user.email %>">
+            
+            
             <!-- Submit Button -->
             <button type="submit">Create Course</button>
         </form>

@@ -5,7 +5,7 @@
     <%- include('./partials/nav.ejs') %>
 
     <h1>Edit Course</h1>
-    <div class="create-course content">
+    <div class="create-course-content">
         <form action="/courses/<%= course._id %>?_method=PUT" method="POST">
             <label for="name">Course Name:</label>
             <input type="text" id="name" name="name" value="<%= course.name %>" required>
@@ -27,6 +27,9 @@
           
             <label for="endDate">End Date:</label>
             <input type="date" id="endDate" name="endDate" value="<%= course.endDate.toISOString().substring(0, 10) %>" required>
+
+            <label for="creator">Created By:</label>
+            <label for="creator"> <%= user.email %> </label><br>
           
             <button type="submit">Update Course</button>
           </form>

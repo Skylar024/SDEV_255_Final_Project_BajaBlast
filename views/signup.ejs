@@ -1,0 +1,80 @@
+<%- include('./partials/head.ejs') %>
+<%- include('./partials/nav') %>
+
+<form class="user-info">
+    <h2>Sign Up</h2>
+    <label for="email"><h4>Email:</h4></label>
+    <input type="text" name="email" required />
+    <div class="email error"></div>
+
+    <label for="password"><h4>Password:</h4></label>
+    <input type="password" name="password" required />
+    <div class="password error"></div>
+
+    <label for="role"><h4>Are you a Teacher?</h4></label>
+    <input type="checkbox" name="checkBox" id="checkBoxID"/>
+    <div class="checkBox error"></div><br>
+
+
+    <button>Sign Up</button>
+</form>
+<section class="user-info">
+    <label for="login"><h4>Already have an Account? Login Here</h4></label>
+    <a href="/login">
+        <button class="loginbtn">Login Here</button> 
+    </a>
+</section>
+
+<script>
+    const form = document.querySelector('form');
+    const emailError = document.querySelector('.email.error');
+    const passwordError = document.querySelector('.password.error');
+    const checkBoxError = document.querySelector('.checkBox.error');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const isTeacher = document.getElementById('checkBoxID').checked;
+        console.log("Teacher?: ", isTeacher)
+
+        //reset errors when submitting new information
+        emailError.textContent = '';
+        passwordError.textContent = '';
+        checkBoxError.textContent = ''; //Not really used
+
+        //get values of the users submitted email and password
+        const email = form.email.value;
+        const password = form.password.value;
+
+        //assign user role based on if user checked the teacher checkBox
+        var role = 'Student'; // Defaults to being a Student
+        if (isTeacher) {
+            role = 'Teacher';
+        } else {
+            role = 'Student';
+        }
+        console.log("Role: ", role)
+
+        try {
+            const res = await fetch('/signup', {
+                method: 'POST',
+                body: JSON.stringify({ email, password, role }),
+                headers: { 'Content-Type': 'application/json' }
+            });
+            const data = await res.json();
+            //console.log(data);
+            if (data.errors) {  //if there are any errors, display them on screen
+                emailError.textContent = data.errors.email;
+                passwordError.textContent = data.errors.password;
+                checkBoxError.textContent = data.errors.role;
+            }
+            if (data.user) {    //if there is a valid user loggin in, redirect them to the home page after logging in
+                location.assign('/');
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }
+    });
+</script>
+
+<%- include('./partials/footer.ejs') %>

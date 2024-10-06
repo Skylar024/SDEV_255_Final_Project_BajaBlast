@@ -1,17 +1,34 @@
 <nav class="navbar"></nav>
-    <div class="container">
+    <div class="nav-container">
         <nav>
-            <b>
-                <a href="/">Home</a> &nbsp; &nbsp; &nbsp;
-                <a href="/about">About</a> &nbsp; &nbsp; &nbsp;
-                <a href="/student">Student</a> &nbsp; &nbsp; &nbsp;
-                <a href="/teacher">Teacher</a> &nbsp; &nbsp; &nbsp;
-                <a href="/courses">Courses</a>&nbsp; &nbsp; &nbsp;
-                <a href="/create">Create a Course</a> &nbsp; &nbsp; &nbsp;
-            </b>
+            <ul>
+                
+                <li><a href="/">Home</a></li> &nbsp; &nbsp; &nbsp;
+                
+                <% if (user) { %>
+                    <% if (user.role === 'student') { %>
+                        <li>Welcome, Student! <%= user.email %> </li> &nbsp; &nbsp; &nbsp;
+                        <li><a href="/about">About</a></li> &nbsp; &nbsp; &nbsp;
+                        <li><a href="/courses">Courses</a></li> &nbsp; &nbsp; &nbsp;
+                        <li><a href="/logout" class="navbtn">Logout</a></li> &nbsp; &nbsp; &nbsp;
+                    <% } else { %>
+                        <li>Welcome, Teacher! <%= user.email %> </li> &nbsp; &nbsp; &nbsp;
+                        <li><a href="/about">About</a></li> &nbsp; &nbsp; &nbsp;
+                        <li><a href="/courses">Courses</a></li> &nbsp; &nbsp; &nbsp;
+                        <li><a href="/create">Create a Course</a></li> &nbsp; &nbsp; &nbsp;
+                        <li><a href="/logout" class="navbtn">Logout</a></li> &nbsp; &nbsp; &nbsp;
+                    <% } %>
+                <% } else { %>
+                    <li><a href="/about">About</a></li> &nbsp; &nbsp; &nbsp;
+                    <li><a href="/courses">Courses</a></li> &nbsp; &nbsp; &nbsp;
+                    <li><a href="/login" class="navbtn">Login</a></li> &nbsp; &nbsp; &nbsp;
+                    <li><a href="/signup" class="navbtn">Sign Up</a></li> &nbsp; &nbsp; &nbsp;
+                <% } %>
+                    
+            </ul>
         </nav>
 
-        <img class="image" src='/img/logo.png' alt="Logo Image" style="padding:20px;width:100%;height:500px;">
+        <img class="image" src='/img/logo.png' alt="Logo Image">
         
     </div>
 </nav>
