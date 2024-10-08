@@ -17,11 +17,11 @@
         <p>End Date: <%= course.endDate.toDateString() %></p>
         <p>Creator: <%= course.creator %></p>
         <input class="hiddenUser" type="hidden" value="<%= user.email %>">
-        <p>User: <%=user.email%></p>
+        <!-- <p>User: <%=user.email%></p> -->
 
-        <% if (user.role === 'student') { %>
+        <!-- <% if (user.role === 'student') { %>
           <a class="add" data-doc="<%= course.name %>">Add course</a>
-        <% } %>
+        <% } %> -->
         
         <% if (user.email === course.creator) { %>
           <p>

@@ -255,6 +255,7 @@ nav ul{
   inset: 15% -400px 15% auto;
   display: grid;
   grid-template-rows: 70px 1fr 70px;
+  border-radius: 15px;
 }
 body.showCart .cartTab {
   inset: 15% 0 15% auto;
