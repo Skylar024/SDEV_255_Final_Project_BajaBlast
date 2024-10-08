@@ -10,7 +10,7 @@ const User = require('./models/User');
 
 // connect to mongodb
 const dbURI = 'mongodb+srv://dsantana15:kezQJOjLKcCjJ0Mf@nodetest.pciif.mongodb.net/?retryWrites=true&w=majority&appName=NodeTest'
-mongoose.connect(dbURI, {useNewUrlParser:true, useUnifiedTopology:true})
+mongoose.connect(dbURI)
   .then((result) => BBApp.listen(3000))  // Start server after DB connection
   .catch((err) => console.log(err));
 
@@ -30,8 +30,8 @@ BBApp.set('view engine', 'ejs');
 BBApp.get('*', checkUser);
 BBApp.get('/', (req, res) => res.render('index', {title: 'Home'}));
 BBApp.get('/about', (req, res) => res.render('about', {title: 'About Us'}));
-BBApp.get('/create', (req, res) => res.render('create', {title: 'Add course Page'}));
-
+BBApp.get('/create', (req, res) => res.render('create', {title: 'Create a Course'}));
+BBApp.get('/cart', requireAuth, (req, res) => res.render('cart', {title: 'Course Cart'}));
 
 //Login and Signup Routes
 BBApp.get('/login', (req, res) => res.render('login', {title: 'Login Page'}));
@@ -104,5 +104,9 @@ BBApp.put('/courses/:id', async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
+
+
+
+
 
 BBApp.use(authRoutes);

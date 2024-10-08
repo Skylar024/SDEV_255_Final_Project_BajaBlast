@@ -1,0 +1,47 @@
+<html lang="en">
+
+    <%- include('./partials/head.ejs') %>
+
+    <body>
+
+        <%- include('./partials/nav.ejs') %>
+
+        <div id="cartHero">
+            <!-- Shopping Cart -->
+            <section class="cart-section">
+                <div class="container">
+                    <h1 style="font-family:cursive;"><%= user.email %>'s, Shopping Cart</h1>
+                    <div class="courseListDiv">
+                        <a>
+                            <h1>Here is your List<%= user.courses %>_________ </h1>
+                            <button class="test1">Test1</button>
+
+                            <button class="displaybtn">Display Courses</button>
+                        </a>
+                    </div>
+                    <input type="hidden" value="<%=user.email%>">
+                    <p><%= user.email %></p>
+                    <div class="courseList error"></div>
+                </div>
+            </section>
+
+            <!-- <script>
+                const btn1 = document.querySelector('.test1');
+                
+                btn1.addEventListener('click', () => {
+                    console.log(User)
+                })
+
+                
+            </script> -->
+             
+
+
+        </div>
+
+
+
+
+    </body>
+</html>
+

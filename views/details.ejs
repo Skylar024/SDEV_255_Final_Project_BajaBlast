@@ -16,6 +16,12 @@
         <p>Start Date: <%= course.startDate.toDateString() %></p>
         <p>End Date: <%= course.endDate.toDateString() %></p>
         <p>Creator: <%= course.creator %></p>
+        <input class="hiddenUser" type="hidden" value="<%= user.email %>">
+        <p>User: <%=user.email%></p>
+
+        <% if (user.role === 'student') { %>
+          <a class="add" data-doc="<%= course.name %>">Add course</a>
+        <% } %>
         
         <% if (user.email === course.creator) { %>
           <p>
@@ -36,6 +42,21 @@
 
     <!-- Script for handling delete operation -->
     <script>
+        const tempAdd = document.querySelector('a.add');
+        const tempUser = document.querySelector('hiddenUser');
+        tempAdd.addEventListener('click', () => {
+          try {
+
+            fetch("/cart", {
+              method: 'PUT',
+            })
+
+          }
+          catch (err) {
+            console.log(err);
+          }
+        })
+
         const trashcan = document.querySelector('a.delete');
         trashcan.addEventListener('click', (e) => {
           let text;

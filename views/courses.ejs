@@ -2,7 +2,7 @@
 
     <%- include('./partials/head.ejs') %>
 
-    <body>
+    <body class="showCart">
 
         <%- include('./partials/nav.ejs') %>
 
@@ -37,18 +37,81 @@
                                 <p class="suject"><%= course.subject %></p>
             
                             </a>
+                            <a>
+                                <button class="addClass" value="<%= course.name %>">Add</button>
+                                <button class="dropClass" value="<%= course.name %>">Drop</button>
+                            </a>
+                            
+                            
                 
                         <% }) %>
                     <% } else { %>
                         <h2>Oops, there are no courses here...</h2>
                     <% } %>
                 </div>
-                <!-- <div id="courseList-div">Courses List</div>
+                <!-- <div class="testdiv">
+                    Test
                 </div> -->
+                <input class="hiddenUser" type="hidden" value="<%= user._id %>">
+                <% if (user.role === 'student') { %>
+                    <div class="cartTab">
+                        <h1>Shopping Cart</h1>
+                        <div class="listCart">
+                            <div class="item">
+                                <div class="name">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btns">
+                            <button class="close">CLOSE</button>
+                        </div>
+                    </div>
+                <% } %>
         </section>
 
         <%- include('./partials/footer.ejs') %>
 
     </body>
+
+    <script>
+        const User = document.querySelector('.hiddenUser');
+        const addBtn = document.querySelectorAll('.addClass');
+        const dropBtn = document.querySelectorAll('.dropClass');
+        const testDiv = document.querySelector('.name');
+        const listCartDiv = document.querySelector('.listCart');
+        let classes = [];
+
+        for(let x = 0; x < addBtn.length; x++) {
+            dropBtn[x].style.visibility = "hidden";
+            addBtn[x].addEventListener('click', () => {
+                console.log(addBtn[x].value, "Added")
+                addBtn[x].style.visibility = "hidden";
+                dropBtn[x].style.visibility = "visible";
+                addClass(addBtn[x].value, testDiv)
+            })
+            dropBtn[x].addEventListener('click', () => {
+                console.log(dropBtn[x].value, "Dropped")
+                addBtn[x].style.visibility = "visible";
+                dropBtn[x].style.visibility = "hidden";
+                dropClass(dropBtn[x].value, testDiv)
+            })
+        }
+
+        function addClass(className, Div) {
+            Div.innerHTML += className
+        }
+
+        function dropClass(className, Div) {
+            //console.log(className, className.length)
+            let testDivString = Div.innerHTML
+            Div.innerHTML = '';
+            //console.log(String(testDivString))
+            testDivString = testDivString.replace(className, "");
+            //console.log(testDivString)
+            Div.innerHTML = testDivString
+        }
+        
+    </script>
 
 </html>
