@@ -42,20 +42,7 @@
 
     <!-- Script for handling delete operation -->
     <script>
-        const tempAdd = document.querySelector('a.add');
-        const tempUser = document.querySelector('hiddenUser');
-        tempAdd.addEventListener('click', () => {
-          try {
-
-            fetch("/cart", {
-              method: 'PUT',
-            })
-
-          }
-          catch (err) {
-            console.log(err);
-          }
-        })
+        
 
         const trashcan = document.querySelector('a.delete');
         trashcan.addEventListener('click', (e) => {

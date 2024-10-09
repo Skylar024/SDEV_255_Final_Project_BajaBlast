@@ -209,7 +209,8 @@ footer {
   background-color: rgb(30, 30, 226);
 }
 .nav-container img{
-  width: 25%;
+  width: 50%;
+  height: 50%;
   display: block;
   margin: 0 auto;
   
