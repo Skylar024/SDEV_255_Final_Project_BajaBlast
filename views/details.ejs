@@ -16,6 +16,8 @@
         <p>Start Date: <%= course.startDate.toDateString() %></p>
         <p>End Date: <%= course.endDate.toDateString() %></p>
         <p>Creator: <%= course.creator %></p>
+        <input class="hiddenUser" type="hidden" value="<%= user.email %>">
+        
         
         <% if (user.email === course.creator) { %>
           <p>
@@ -36,6 +38,8 @@
 
     <!-- Script for handling delete operation -->
     <script>
+        
+
         const trashcan = document.querySelector('a.delete');
         trashcan.addEventListener('click', (e) => {
           let text;
