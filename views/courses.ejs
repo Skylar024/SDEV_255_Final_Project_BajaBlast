@@ -20,16 +20,6 @@
         <section class="">
             <div class="container">
                 <div class="courseSort-dropdown">
-                    <!--<label class="text-dark" for="sortBy">Sort by:</label>
-                    <!-- <button onclick=printSomething() class="btn btn-outline-secondary" type="button" id="teacherFilter">
-                        Teacher
-                    </button>
-                    <button onclick=printSomething() class="btn btn-outline-secondary" type="button" id="subjectAreaFilter">
-                        Subject Area
-                    </button>
-                    <button onclick=printSomething() class="btn btn-outline-secondary" type="button" id="creditsFilter">
-                        Credits
-                    </button> -->
                     <% if (courses.length > 0) { %>
                         <% courses.forEach(course => { %>
                             <a class="single" href="/courses/<%=course._id %>">
@@ -37,11 +27,12 @@
                                 <p class="suject"><%= course.subject %></p>
             
                             </a>
+                            <% if(user.role === 'student') { %>
                             <a>
                                 <button class="addClass" value="<%= course.name %>">Add</button>
                                 <button class="dropClass" value="<%= course.name %>">Drop</button>
                             </a>
-                            
+                            <% } %>
                             
                 
                         <% }) %>
@@ -49,9 +40,6 @@
                         <h2>Oops, there are no courses here...</h2>
                     <% } %>
                 </div>
-                <!-- <div class="testdiv">
-                    Test
-                </div> -->
                 <input class="hiddenUser" type="hidden" value="<%= user._id %>">
                 <% if (user.role === 'student') { %>
                     <div class="cartTab">
@@ -63,9 +51,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="btns">
-                            <button class="close">CLOSE</button>
-                        </div> -->
                     </div>
                 <% } %>
         </section>
