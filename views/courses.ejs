@@ -6,6 +6,18 @@
 
         <%- include('./partials/nav.ejs') %>
 
+        <section class="">
+            <div class="container">
+                <h3>Filter Courses</h3>
+                <form action="/courses" method="GET">
+                    <input type="text" name="name" placeholder="Course Name" />
+                    <input type="text" name="teacher" placeholder="Teacher Name" />
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+        </section>
+        
+
         <!--Courses Description-->
         <section class="">
             <div class="container">
@@ -19,28 +31,30 @@
         <!--Courses List-->
         <section class="">
             <div class="container">
-                <div class="courseSort-dropdown">
+                <div class="courseSort">
                     <% if (courses.length > 0) { %>
                         <% courses.forEach(course => { %>
-                            <a class="single" href="/courses/<%=course._id %>">
+                            <a class="single" href="/courses/<%= course._id %>">
                                 <h3 class="title"><%= course.name %></h3>
-                                <p class="suject"><%= course.subject %></p>
-            
+                                <p class="subject"><%= course.subject %></p>
                             </a>
-                            <% if(user.role === 'student') { %>
-                            <a>
-                                <button class="addClass" value="<%= course.name %>">Add</button>
-                                <button class="dropClass" value="<%= course.name %>">Drop</button>
-                            </a>
+                            <% if (user.role === 'student') { %>
+                                <a>
+                                    <% if (user.courses.includes(course._id)) { %>
+                                        <button class="dropCourse" onclick="dropCourse('<%= course._id %>', '<%= user._id %>')">Drop</button>
+                                    <% } else { %>
+                                        <button class="addCourse" onclick="addCourse('<%= course._id %>', '<%= user._id %>')">Add</button>
+
+                                    <% } %>
+                                </a>
                             <% } %>
-                            
-                
                         <% }) %>
                     <% } else { %>
                         <h2>Oops, there are no courses here...</h2>
                     <% } %>
                 </div>
-                <input class="hiddenUser" type="hidden" value="<%= user._id %>">
+                
+                <input class="hiddenUser" type="hidden" value="<%= user %>">
                 <% if (user.role === 'student') { %>
                     <div class="cartTab">
                         <h1>Shopping Cart</h1>
@@ -61,41 +75,86 @@
 
     <script>
         const User = document.querySelector('.hiddenUser');
-        const addBtn = document.querySelectorAll('.addClass');
-        const dropBtn = document.querySelectorAll('.dropClass');
         const testDiv = document.querySelector('.name');
         const listCartDiv = document.querySelector('.listCart');
         let classes = [];
+        console.log('hello')
 
-        for(let x = 0; x < addBtn.length; x++) {
-            dropBtn[x].style.visibility = "hidden";
-            addBtn[x].addEventListener('click', () => {
-                console.log(addBtn[x].value, "Added")
-                addBtn[x].style.visibility = "hidden";
-                dropBtn[x].style.visibility = "visible";
-                addClass(addBtn[x].value, testDiv)
-            })
-            dropBtn[x].addEventListener('click', () => {
-                console.log(dropBtn[x].value, "Dropped")
-                addBtn[x].style.visibility = "visible";
-                dropBtn[x].style.visibility = "hidden";
-                dropClass(dropBtn[x].value, testDiv)
-            })
-        }
 
-        function addClass(className, Div) {
-            Div.innerHTML += className
-        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const addButtons = document.querySelectorAll('.addClass');
+            const dropButtons = document.querySelectorAll('.dropClass');
+        
+            addButtons.forEach((btn, index) => {
+                btn.addEventListener('click', () => {
+                    btn.style.display = 'none';
+                    dropButtons[index].style.display = 'inline-block';
+                });
+            });
+        
+            dropButtons.forEach((btn, index) => {
+                btn.addEventListener('click', () => {
+                    btn.style.display = 'none';
+                    addButtons[index].style.display = 'inline-block';
+                });
+            });
+        });
 
-        function dropClass(className, Div) {
-            //console.log(className, className.length)
-            let testDivString = Div.innerHTML
-            Div.innerHTML = '';
-            //console.log(String(testDivString))
-            testDivString = testDivString.replace(className, "");
-            //console.log(testDivString)
-            Div.innerHTML = testDivString
+        
+        async function addCourse(courseId, userId) {
+            try {
+                const response = await fetch(`/api/courses/add`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ courseId, userId })
+                });
+        
+                const data = await response.json();
+        
+                if (response.ok) {
+                    console.log(`Course ${courseId} added for user ${userId}`);
+                    // Reload the page after successfully adding the course
+                    window.location.reload();
+                } else {
+                    console.error('Failed to add course:', data.message);
+                    showError(data.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showError('An unexpected error occurred. Please try again.');
+            }
         }
+        
+        async function dropCourse(courseId, userId) {
+            try {
+                const response = await fetch(`/api/courses/drop`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ courseId, userId })
+                });
+        
+                const data = await response.json();
+        
+                if (response.ok) {
+                    console.log(`Course ${courseId} dropped for user ${userId}`);
+                    // Reload the page after successfully dropping the course
+                    window.location.reload();
+                } else {
+                    console.error('Failed to drop course:', data.message);
+                    showError(data.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showError('An unexpected error occurred. Please try again.');
+            }
+        }
+        
+        
+
         
     </script>
 
