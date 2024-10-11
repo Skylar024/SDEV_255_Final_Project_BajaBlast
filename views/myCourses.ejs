@@ -1,0 +1,168 @@
+<html lang="en">
+
+    <%- include('./partials/head.ejs') %>
+
+    <body class="showCart">
+
+        <%- include('./partials/nav.ejs') %>
+
+        <!--Courses Description-->
+        <section class="">
+            <div class="container">
+                <h3>
+                    Courses:
+                </h3>
+                <div class="courses-list">
+                </div>
+            </div>
+        </section>
+        <!--Courses List-->
+        <section class="">
+            <div class="container">
+                <div class="courseSort">
+                    <% if (user.courses.length > 0) { %>
+                        <% if (myCourses.length > 0) { %>
+                            <% user.courses.forEach(courseId => { %>
+                                <% myCourses.forEach(course => { %>
+                                    <% if (courseId==course._id) { %>
+                                        <a class="single" href="/courses/<%= course._id %>">
+                                            <h3 class="title"><%= course.name %></h3>
+                                            <p class="subject"><%= course.subject %></p>
+                                        </a>
+                                        <% if (user.role === 'student') { %>
+                                            <a>
+                                                <% if (user.courses.includes(course._id)) { %>
+                                                    <button class="dropCourse" onclick="dropCourse('<%= course._id %>', '<%= user._id %>')">Drop</button>
+                                                <% } else { %>
+                                                    <button class="addCourse" onclick="addCourse('<%= course._id %>', '<%= user._id %>')">Add</button>
+
+                                                <% } %>
+                                            </a>
+                                        <% } %>
+                                    <% } %>
+                                <% }) %>
+                                <% }) %>
+                        <% } %>
+                    <% } else { %>
+                        <h2>Oops, there are no courses here...</h2>
+                    <% } %>
+                </div>
+                
+                
+        </section>
+
+        <%- include('./partials/footer.ejs') %>
+
+    </body>
+
+    <script>
+        const User = document.querySelector('.hiddenUser');
+        const testDiv = document.querySelector('.name');
+        const listCartDiv = document.querySelector('.listCart');
+        let classes = [];
+        console.log('hello')
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const addButtons = document.querySelectorAll('.addClass');
+            const dropButtons = document.querySelectorAll('.dropClass');
+        
+            addButtons.forEach((btn, index) => {
+                btn.addEventListener('click', () => {
+                    btn.style.display = 'none';
+                    dropButtons[index].style.display = 'inline-block';
+                });
+            });
+        
+            dropButtons.forEach((btn, index) => {
+                btn.addEventListener('click', () => {
+                    btn.style.display = 'none';
+                    addButtons[index].style.display = 'inline-block';
+                });
+            });
+        });
+
+        async function addCourse(courseId, userId) {
+            try {
+                const response = await fetch(`/api/courses/add`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ courseId, userId })
+                });
+        
+                const data = await response.json();
+        
+                if (response.ok) {
+                    console.log(`Course ${courseId} added for user ${userId}`);
+                    // Reload the page after successfully adding the course
+                    window.location.reload();
+                } else {
+                    console.error('Failed to add course:', data.message);
+                    showError(data.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showError('An unexpected error occurred. Please try again.');
+            }
+        }
+        
+        async function addCourse(courseId, userId) {
+            try {
+                const response = await fetch(`/api/courses/add`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ courseId, userId })
+                });
+        
+                const data = await response.json();
+        
+                if (response.ok) {
+                    console.log(`Course ${courseId} added for user ${userId}`);
+                    // Reload the page after successfully adding the course
+                    window.location.reload();
+                } else {
+                    console.error('Failed to add course:', data.message);
+                    showError(data.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showError('An unexpected error occurred. Please try again.');
+            }
+        }
+        
+        async function dropCourse(courseId, userId) {
+            try {
+                const response = await fetch(`/api/courses/drop`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ courseId, userId })
+                });
+        
+                const data = await response.json();
+        
+                if (response.ok) {
+                    console.log(`Course ${courseId} dropped for user ${userId}`);
+                    // Reload the page after successfully dropping the course
+                    window.location.reload();
+                } else {
+                    console.error('Failed to drop course:', data.message);
+                    showError(data.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showError('An unexpected error occurred. Please try again.');
+            }
+        }
+        
+        
+
+        
+    </script>
+
+</html>
