@@ -169,6 +169,7 @@ footer {
 
   a.single {
     color: black;
+    padding-top: 5em;
   }
   a.single:hover {
     color: white;
@@ -277,6 +278,55 @@ body.showCart .cartTab {
 .name {
   word-break: break-all;
 }
+
+.addCourse {
+  color: green; 
+  background-color: lightgreen; 
+  border: 2px solid green; 
+  padding: 10px 20px; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  font-size: 16px; 
+  transition: background-color 0.3s; 
+}
+
+.addCourse:hover {
+  background-color: darkgreen; 
+  color: white; 
+}
+
+
+.dropCourse {
+  color: red; 
+  background-color: pink; 
+  border: 2px solid red; 
+  padding: 10px 20px; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  font-size: 16px; 
+  transition: background-color 0.3s; 
+}
+
+.dropCourse:hover {
+  background-color: red; 
+  color: white; 
+}
+
+
+
+.container{
+  padding-top: 2rem;
+  padding-bottom: 0rem;
+}
+
+.title{
+  padding-top: 3rem;
+}
+
+.single{
+  padding-top:2em;
+}
+
 
 
 
