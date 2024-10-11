@@ -1,4 +1,4 @@
-<html lang="en">
+<<html lang="en">
 
     <%- include('./partials/head.ejs') %>
     
@@ -23,39 +23,43 @@
             </section>
         </div>
 
-        <!--Student, Teacher, & About Sections-->
-        <section class="">
-            <div class="container">
-                <!--Student Section-->
-                <div class="col-md">
-                    <div class="card bg-dark text-light">
-                        <div class="card-body text-center">
-                            <div class="student-card-title">
-                                <h3>Students</h3>
+        <% if (!user) { %>
+            <!--Student, Teacher, & About Sections-->
+            <section class="">
+                <div class="container">
+                    <!--Student Section-->
+                    <div class="col-md">
+                        <div class="card bg-dark text-light">
+                            <div class="card-body text-center">
+                                <div class="student-card-title">
+                                    <h3>Students</h3>
+                                </div>
+                                <p class="student-card-text">
+                                    Browse through all of our courses offered
+                                </p>
+                                <a href="/login" class="btn btn-primary">Login</a>
                             </div>
-                            <p class="student-card-text">
-                                Browse through all of our courses offered
-                            </p>
-                            <a href="/login" class="btn btn-primary">Login</a>
                         </div>
                     </div>
-                </div>
-                <!--Teacher Section-->
-                <div class="col-md">
-                    <div class="card bg-dark text-light">
-                        <div class="card-body text-center">
-                            <div class="teacher-card-title">
-                                <h3>Teacher</h3>
+                    <!--Teacher Section-->
+                    <div class="col-md">
+                        <div class="card bg-dark text-light">
+                            <div class="card-body text-center">
+                                <div class="teacher-card-title">
+                                    <h3>Teacher</h3>
+                                </div>
+                                <p class="teacher-card-text">
+                                    As a Teacher, you can create courses for Students to 
+                                    view and enroll in. Only the creator of a course can 
+                                    make any changes to it
+                                </p>
+                                <a href="/login" class="btn btn-primary">Login</a>
                             </div>
-                            <p class="teacher-card-text">
-                                As a Teacher, you can create courses for Students to 
-                                view and enroll in. Only the creator of a course can 
-                                make any changes to it
-                            </p>
-                            <a href="/login" class="btn btn-primary">Login</a>
                         </div>
                     </div>
-                </div>
+        <% } %>
+
+
                 <!--About Section-->
                 <div class="col-md">
                     <div class="card bg-dark text-light">
@@ -92,4 +96,4 @@
         <%- include('./partials/footer.ejs') %>
 
     </body>
-</html>
+</html>>
