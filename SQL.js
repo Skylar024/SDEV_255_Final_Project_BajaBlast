@@ -1,3 +1,9 @@
+//// NOT USING IN THIS PROJECT
+
+
+
+
+
 const createTablesSQL = `
     -- Table: Student
     CREATE TABLE IF NOT EXISTS Student (
