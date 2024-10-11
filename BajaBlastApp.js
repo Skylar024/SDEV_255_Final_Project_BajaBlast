@@ -5,7 +5,7 @@ const methodOverride = require('method-override');  // Include method-override
 const Course = require('./models/Course');
 const authRoutes = require('./routes/authRoutes');
 const cookieParser = require('cookie-parser');
-const { requireAuth, checkUser } = require('./middleware/authMiddleware');
+const { requireAuth, isAuthenticated, checkUser } = require('./middleware/authMiddleware');
 const User = require('./models/User');
 
 // connect to mongodb
@@ -31,7 +31,7 @@ BBApp.get('*', checkUser);
 BBApp.get('/', (req, res) => res.render('index', {title: 'Home'}));
 BBApp.get('/about', (req, res) => res.render('about', {title: 'About Us'}));
 BBApp.get('/create', (req, res) => res.render('create', {title: 'Create a Course'}));
-BBApp.get('/cart', requireAuth, (req, res) => res.render('cart', {title: 'Course Cart'}));
+//BBApp.get('/myCourses', requireAuth, (req, res) => res.render('myCourses', {title: 'Course Cart'}));
 
 //Login and Signup Routes
 BBApp.get('/login', (req, res) => res.render('login', {title: 'Login Page'}));
@@ -39,10 +39,36 @@ BBApp.get('/signup', (req, res) => res.render('signup', {title: 'Sign Up Page'})
 
 // List all courses
 BBApp.get('/courses', requireAuth, (req, res) => {
-  Course.find().sort({ createdAt: -1 })
-    .then(result => res.render('courses', { title: 'All courses', courses: result }))
+  const { name, teacher } = req.query; // Get the query parameters from the request
+  let filter = {}; // Initialize an empty filter object
+
+  // Add filtering conditions based on the query parameters
+  if (name) {
+    filter.name = { $regex: name, $options: 'i' }; // Case-insensitive search for course name
+  }
+  if (teacher) {
+    filter.teacher = { $regex: teacher, $options: 'i' }; // Case-insensitive search for teacher name
+  }
+
+  Course.find(filter).sort({ createdAt: -1 })
+    .then(result => res.render('courses', { title: 'My Courses', courses: result }))
     .catch(err => console.log(err));
 });
+
+// List all myCourses selected
+BBApp.get('/myCourses', requireAuth, (req, res) => {
+
+  Course.find().sort({ createdAt: -1 })
+    .then(result => res.render('myCourses', { title: 'My Courses', myCourses: result }))
+    .catch(err => console.log(err));
+});
+
+
+
+
+
+
+
 // Add a new course
 BBApp.post('/courses', (req, res) => {
   const course = new Course(req.body);
@@ -105,7 +131,62 @@ BBApp.put('/courses/:id', async (req, res) => {
   }
 });
 
+//  add course route
+BBApp.post('/api/courses/add', requireAuth, async (req, res) => {
+  const { courseId, userId } = req.body;
 
+  try {
+      const user = await User.findById(userId);
+      if (!user) {
+          return res.status(404).json({ success: false, message: 'User not found' });
+      }
+
+      // Check if the course is already added
+      if (user.courses.includes(courseId)) {
+          return res.status(400).json({ success: false, message: 'Course already added' });
+      }
+
+      // Update the user's courses array using findByIdAndUpdate
+      await User.findByIdAndUpdate(
+          userId,
+          { $push: { courses: courseId } },
+          { new: true, runValidators: true } // runValidators ensures validation rules are still applied
+      );
+
+      res.json({ success: true, message: 'Course added successfully' });
+  } catch (err) {
+      res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+
+
+// Drop course route
+BBApp.post('/api/courses/drop', requireAuth, async (req, res) => {
+  const { courseId, userId } = req.body;
+
+  try {
+      const user = await User.findById(userId);
+      if (!user) {
+          return res.status(404).json({ success: false, message: 'User not found' });
+      }
+
+      if (!user.courses.includes(courseId)) {
+          return res.status(400).json({ success: false, message: 'Course not found in user\'s list' });
+      }
+
+      // Remove the course from the user's courses array using $pull
+      await User.findByIdAndUpdate(
+          userId,
+          { $pull: { courses: courseId } },
+          { new: true, runValidators: true }
+      );
+
+      res.json({ success: true, message: 'Course dropped successfully' });
+  } catch (err) {
+      res.status(500).json({ success: false, message: 'Server error. Please try again later.' });
+  }
+});
 
 
 
